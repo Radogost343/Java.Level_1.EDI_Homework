@@ -65,14 +65,7 @@ public class lesson1_Eremin_Dmitrii {
     static boolean isLessOrMore (double a, double b)
     {
         System.out.println("Задание 4: ((a + b > 10) && (a + b <= 20)). "  + "a = " + a + ", b = " + b + ", a + b = " + (a+b));
-        if ((a + b > 10.0) && (a + b <= 20.0))
-        {
-        return true;
-        }
-        else
-            {
-        return false;
-        }
+        return (a + b > 10.0) && (a + b <= 20.0);
     }
 
     //    5. Написать метод, которому в качестве параметра передается целое число, метод должен напечатать в консоль
@@ -84,10 +77,9 @@ public class lesson1_Eremin_Dmitrii {
         {
             System.out.println("Число a = " + a + " положительное.");
         }
-        else if (a < 0)
-            {
-            System.out.println("Число a = " + a + " отрицательное.");
-        }
+        else {
+        System.out.println("Число a = " + a + " отрицательное.");
+    }
     }
 
     //  6. Написать метод, которому в качестве параметра передается целое число,
@@ -98,13 +90,13 @@ public class lesson1_Eremin_Dmitrii {
         System.out.print("Число a = " + a + " отрицательное? ");
         if (a != 0)
         {
-            return a < 0 ? true : false;
+            return a < 0;
         }
         else
             {
             System.out.println("Число ноль отделяет положительные и отрицательные числа");
         }
-        return a < 0 ? true : false;
+        return false;
     }
 
     //    7. Написать метод, которому в качестве параметра передается строка, обозначающая имя,
@@ -135,6 +127,5 @@ public class lesson1_Eremin_Dmitrii {
                 return x;
         }
     }
-
 }
 
