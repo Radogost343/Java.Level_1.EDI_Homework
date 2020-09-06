@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Java.Level_1.EDI_Homework.iml" filepath="$PROJECT_DIR$/Java.Level_1.EDI_Homework.iml" />
       <module fileurl="file://$PROJECT_DIR$/lesson_1_EDI.iml" filepath="$PROJECT_DIR$/lesson_1_EDI.iml" />
     </modules>
   </component>
