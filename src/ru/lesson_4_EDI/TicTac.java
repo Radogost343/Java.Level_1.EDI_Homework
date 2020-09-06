@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class TicTac {
         final static int SIZE = 5;
-        final static int numberOfWinnerSymbolLine = 4;
         final static char [][] map = new char[SIZE][SIZE];
         final static char emptySymbol = '*';
         final static char playerSymbol = 'Х';
@@ -21,14 +20,74 @@ public class TicTac {
         public static void main(String[] args) {
             initMap();
             printMap();
-            for (int i = 0; i < 4; i++) {
+
+            while (true) {
+
                 playerTurn();
                 printMap();
+
+                if (!isMapFull())
+            {
+                System.out.println("Поле заполненно.");
+                break;
             }
-            System.out.println(isCheckWin(playerSymbol));
+
+                if (isCheckWin(playerSymbol))
+                {
+                    break;
+                }
+
+                computerTurn();
+                printMap();
+
+                if (!isMapFull())
+                {
+                    System.out.println("Поле заполненно.");
+                    break;
+                }
+
+                if (isCheckWin(computerSymbol))
+                {
+                    break;
+                }
+            }
         }
 
-        private static boolean isCheckWin(char symbol) {
+    private static void computerTurn() {
+        int x = -1, y = -1;
+        do
+            {
+                x = (int) (Math.random() * SIZE);
+                y = (int) (Math.random() * SIZE);
+        } while (isCellValid(x, y));
+        System.out.println("Компьютер пошел на клетку: " + (x + 1) + " " + (y + 1));
+        map[y][x] = computerSymbol;
+    }
+
+    private static boolean isMapFull() {
+            boolean res = false;
+            for (int i = 0; i < map.length; i++)
+            {
+                for (int k = 0; k < map.length; k++)
+                {
+                    if (map[i][k] == emptySymbol) {
+                        res = true;
+                        break;
+                    }
+                    if (res)
+                    {
+                        break;
+                    }
+                }
+                if (res)
+                {
+                    break;
+                }
+            }
+            return res;
+    }
+
+    private static boolean isCheckWin(char symbol) {
             boolean result = false;
             for (int i = 0; i < map.length; i++)
             {
@@ -42,10 +101,17 @@ public class TicTac {
                     )
                     {
                         result = true;
+                        System.out.println("Выиграли: " + symbol);
                     }
-                    if (result== true) break;
+                    if (result)
+                    {
+                        break;
+                    }
                 }
-                if (result== true) break;
+                if (result)
+                {
+                    break;
+                }
             }
             return result;
         }
@@ -89,7 +155,7 @@ public class TicTac {
                     System.out.println("Повторите ввод");
                     scanner.next();
                 }
-            } while (!isCellValid(x, y));
+            } while (isCellValid(x, y));
 
             if (isCellExists(y,x)) {
                 map[y][x] = playerSymbol;
@@ -105,9 +171,9 @@ public class TicTac {
             }
             if (isCellExists(y,x) && map[y][x] != emptySymbol)
             {
-                res = false;;
+                res = false;
             }
-            return res;
+            return !res;
         }
 
         private static void initMap() {
