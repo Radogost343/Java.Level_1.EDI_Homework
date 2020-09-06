@@ -102,7 +102,8 @@ public class lesson1_Eremin_Dmitrii {
     //    7. Написать метод, которому в качестве параметра передается строка, обозначающая имя,
     //метод должен вывести в консоль сообщение «Привет, указанное_имя!»;
 
-    static void isHelloName (String name) {
+    static void isHelloName (String name)
+    {
         System.out.println("Привет, " + name + "!");
     }
 
