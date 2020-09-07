@@ -1,4 +1,5 @@
 package ru.lesson_4_EDI;
+
 import java.util.Scanner;
 
 /*
@@ -23,10 +24,10 @@ public class TicTac {
 
             while (true) {
 
-                playerTurn();
+                iqAiTurn();
                 printMap();
 
-                if (!isMapFull())
+                if (isMapFull())
             {
                 System.out.println("Поле заполненно.");
                 break;
@@ -37,10 +38,10 @@ public class TicTac {
                     break;
                 }
 
-                computerTurn();
+                playerTurn();
                 printMap();
 
-                if (!isMapFull())
+                if (isMapFull())
                 {
                     System.out.println("Поле заполненно.");
                     break;
@@ -52,6 +53,110 @@ public class TicTac {
                 }
             }
         }
+
+    private static void iqAiTurn()
+    {
+            int x = map.length/2;
+            int y = map.length/2;
+            int maxScoreCell  = 0;
+            for (int i = 0; i < map.length; i++)
+            {
+                for (int k = 0; k < map.length; k++)
+                {
+                    if (map[i][k] == emptySymbol)
+                    {
+                        int temp = checkCellsAround(i, k);
+                        if (temp > maxScoreCell)
+                        {
+                            maxScoreCell = temp;
+                            x = i;
+                            y = k;
+                        }
+                    }
+                }
+            }
+        System.out.println(maxScoreCell);
+        System.out.println("Компьютер пошел на клетку: " + (y + 1) + " " + (x + 1));
+        map[x][y] = computerSymbol;
+    }
+
+    private static int checkCellsAround(int i, int k)
+    {
+        int scoreCell = 0;
+        if (isCellExists(i,k - 1) && map [i][k - 1] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i,k + 1) && map [i][k + 1] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i - 1,k) && map [i - 1][k] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i + 1,k) && map [i + 1][k] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i - 1,k - 1) && map [i - 1][k - 1] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i - 1,k + 1) && map [i - 1][k + 1] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i + 1,k - 1) && map [i + 1][k - 1] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i + 1,k + 1) && map [i + 1][k + 1] == playerSymbol)
+        {
+            scoreCell++;
+            scoreCell++;
+        }
+        if (isCellExists(i,k - 1) && map [i][k - 1] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i,k + 1) && map [i][k + 1] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i - 1,k) && map [i - 1][k] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i + 1,k) && map [i + 1][k] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i - 1,k - 1) && map [i - 1][k - 1] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i - 1,k + 1) && map [i - 1][k + 1] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i + 1,k - 1) && map [i + 1][k - 1] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        if (isCellExists(i + 1,k + 1) && map [i + 1][k + 1] == computerSymbol)
+        {
+            scoreCell++;
+        }
+        return scoreCell;
+    }
 
     private static void computerTurn() {
         int x = -1, y = -1;
@@ -74,17 +179,13 @@ public class TicTac {
                         res = true;
                         break;
                     }
-                    if (res)
-                    {
-                        break;
-                    }
                 }
                 if (res)
                 {
                     break;
                 }
             }
-            return res;
+            return !res;
     }
 
     private static boolean isCheckWin(char symbol) {
