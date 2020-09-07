@@ -33,7 +33,7 @@ public class TicTac {
                 break;
             }
 
-                if (isCheckWin(playerSymbol))
+                if (isCheckWin(computerSymbol))
                 {
                     break;
                 }
@@ -47,7 +47,7 @@ public class TicTac {
                     break;
                 }
 
-                if (isCheckWin(computerSymbol))
+                if (isCheckWin(playerSymbol))
                 {
                     break;
                 }
@@ -83,11 +83,13 @@ public class TicTac {
     private static int checkCellsAround(int i, int k)
     {
         int scoreCell = 0;
+
         if (isCellExists(i,k - 1) && map [i][k - 1] == playerSymbol)
         {
             scoreCell++;
             scoreCell++;
         }
+
         if (isCellExists(i,k + 1) && map [i][k + 1] == playerSymbol)
         {
             scoreCell++;
@@ -154,6 +156,86 @@ public class TicTac {
         if (isCellExists(i + 1,k + 1) && map [i + 1][k + 1] == computerSymbol)
         {
             scoreCell++;
+        }
+
+        if (isCellExists(i + 2, k + 2) && (map [i+1][k+1] == playerSymbol && map [i+2][k+2] == playerSymbol))
+        {
+            scoreCell += 50;
+        }
+
+        if (isCellExists(i,k+2) && (map [i][k+1] == playerSymbol && map [i][k+2] == playerSymbol))
+        {
+            scoreCell += 50;
+        }
+
+        if (isCellExists(i+2,k) && (map [i+1][k] == playerSymbol && map [i+2][k] == playerSymbol))
+        {
+            scoreCell += 50;
+        }
+
+        if (isCellExists(i + 2,k - 2) && (map [i + 1][k - 1] == playerSymbol && map [i + 2][k - 2] == playerSymbol))
+        {
+            scoreCell += 50;
+        }
+
+        if (isCellExists(i + 2, k + 2) && (map [i+1][k+1] == computerSymbol && map [i+2][k+2] == computerSymbol))
+        {
+            scoreCell += 75;
+        }
+
+        if (isCellExists(i,k+2) && (map [i][k+1] == computerSymbol && map [i][k+2] == computerSymbol))
+        {
+            scoreCell += 75;
+        }
+
+        if (isCellExists(i+2,k) && (map [i+1][k] == computerSymbol && map [i+2][k] == computerSymbol))
+        {
+            scoreCell += 75;
+        }
+
+        if (isCellExists(i + 2,k - 2) && (map [i + 1][k - 1] == computerSymbol && map [i + 2][k - 2] == computerSymbol))
+        {
+            scoreCell += 75;
+        }
+
+        if (isCellExists(i + 3, k + 3) && (map [i+1][k+1] == playerSymbol && map [i+2][k+2] == playerSymbol && map[i+3][k+3] == playerSymbol))
+        {
+            scoreCell += 100;
+        }
+
+        if (isCellExists(i,k+3) && (map [i][k+1] == playerSymbol && map [i][k+2] == playerSymbol && map[i][k+3] == playerSymbol))
+        {
+            scoreCell += 100;
+        }
+
+        if (isCellExists(i+3,k) && (map [i+1][k] == playerSymbol && map [i+2][k] == playerSymbol && map[i+3][k] == playerSymbol))
+        {
+            scoreCell += 100;
+        }
+
+        if (isCellExists(i + 3,k - 3) && (map [i + 1][k - 1] == playerSymbol && map [i + 2][k - 2] == playerSymbol && map[i + 3][k - 3] == playerSymbol))
+        {
+            scoreCell += 100;
+        }
+
+        if (isCellExists(i + 3, k + 3) && (map [i+1][k+1] == computerSymbol && map [i+2][k+2] == computerSymbol && map[i+3][k+3] == computerSymbol))
+        {
+            scoreCell += 200;
+        }
+
+        if (isCellExists(i,k+3) && (map [i][k+1] == computerSymbol && map [i][k+2] == computerSymbol && map[i][k+3] == computerSymbol))
+        {
+            scoreCell += 200;
+        }
+
+        if (isCellExists(i+3,k) && (map [i+1][k] == computerSymbol && map [i+2][k] == computerSymbol && map[i+3][k] == computerSymbol))
+        {
+            scoreCell += 200;
+        }
+
+        if (isCellExists(i + 3,k - 3) && (map [i + 1][k - 1] == computerSymbol && map [i + 2][k - 2] == computerSymbol && map[i + 3][k - 3] == computerSymbol))
+        {
+            scoreCell += 200;
         }
         return scoreCell;
     }
