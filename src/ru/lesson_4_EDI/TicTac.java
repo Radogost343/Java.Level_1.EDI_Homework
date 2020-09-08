@@ -1,5 +1,5 @@
 package ru.lesson_4_EDI;
-
+import java.util.Random;
 import java.util.Scanner;
 
 /*
@@ -16,7 +16,8 @@ public class TicTac {
         final static char emptySymbol = '*';
         final static char playerSymbol = 'Х';
         final static char computerSymbol = 'O';
-        static Scanner scanner = new Scanner(System.in);
+        final static Scanner scanner = new Scanner(System.in);
+
 
         public static void main(String[] args) {
            do {
@@ -30,8 +31,11 @@ public class TicTac {
         printMap();
 
         while (true) {
+
             iqAiTurn();
             //playerTurn();
+            //randomComputerTurn();
+
             printMap();
 
             if (isMapFull())
@@ -47,6 +51,8 @@ public class TicTac {
 
             playerTurn();
             //iqAiTurn();
+            //randomComputerTurn();
+
             printMap();
 
             if (isMapFull())
@@ -62,6 +68,7 @@ public class TicTac {
         }
     }
 
+    // не используется метод. Получение числа инт от пользователя.
     private static int getNumberFromConsole() {
         do
         {
@@ -74,6 +81,7 @@ public class TicTac {
         } while (true);
     }
 
+    //метод повтора игры
     private static boolean isTryAgain() {
         boolean res;
         System.out.println("Повторить игру еще раз? 1 – да / 0 – нет");
@@ -95,6 +103,7 @@ public class TicTac {
         return res;
     }
 
+    //получение числа инт от пользователя в пределах от ... до ...
     private static int userInput(int startData, int stopData)
     {
         int num = -1;
@@ -111,7 +120,7 @@ public class TicTac {
         return num;
     }
 
-    //проверка значений в пределах пользовательского ввода
+    //проверка значений в пределах пользовательского ввода от ... и до ...
     private static boolean isValid(int num, int startData, int stopData)
     {
         boolean res = false;
@@ -123,6 +132,7 @@ public class TicTac {
         return res;
     }
 
+    // Ход Умного компьютера
     private static void iqAiTurn()
     {
             int x = map.length/2;
@@ -144,7 +154,10 @@ public class TicTac {
                     }
                 }
             }
+
+
             /*
+            //ПО УМОЛЧАНИЯ ХОДИМ В СЕРЕДИНУ МАССИВА, если раскоментить этот код то будет Random первый ход.
             if (maxScoreCell > 0) {
                 System.out.println("Компьютер пошел на клетку: " + (y + 1) + " " + (x + 1));
                 map[x][y] = computerSymbol;
@@ -152,42 +165,43 @@ public class TicTac {
             if (maxScoreCell == 0) {
                 randomComputerTurn();
             }
-             */
-        System.out.println("Компьютер пошел на клетку: " + (y + 1) + " " + (x + 1));
-        map[x][y] = computerSymbol;
+            */
+
+        // ЗАКОМЕНТЬ НИЖЕ ЕСЛИ ХОЧЕШЬ ПЕРВЫЙ ХОД РАНДОМ и РАСКОМЕНТЬ ВЫШЕ!!!
+        System.out.println("Компьютер пошел на клетку: " + (y + 1) + " " + (x + 1)); // если раскоментил код выше не забудь закоментить этот код, иначе будет два хода компа.
+        map[x][y] = computerSymbol; // если раскоментил код выше не забудь закоментить этот код, иначе будет два хода компа.
     }
 
-
+    //генерация рандомного хода компьютера
     private static void randomComputerTurn() {
         int x = -1, y = -1;
+        Random random = new Random();
         do
             {
-                x = (int) (Math.random() * SIZE);
-                y = (int) (Math.random() * SIZE);
-        } while (isCellValid(y, x));
+                x = random.nextInt(SIZE);
+                y = random.nextInt(SIZE);
+        } while (!isCellValid(y, x));
         System.out.println("Компьютер пошел на клетку: " + (x + 1) + " " + (y + 1));
         map[y][x] = computerSymbol;
     }
 
-
+    //проверка заполненности поля
     private static boolean isMapFull() {
-            boolean res = false;
+            boolean res = true;
             for (int i = 0; i < (map.length * map.length); i++)
             {
                 int x = i / map.length;
                 int y = i % map.length;
                     if (map[x][y] == emptySymbol) {
-                        res = true;
+                        res = false;
                         break;
                     }
-                if (res)
-                {
-                    break;
-                }
+                    if (!res) break;
             }
-            return !res;
+            return res;
     }
 
+    //проверка победы
     private static boolean isCheckWin(char symbol) {
             boolean result = false;
             for (int i = 0; i < map.length; i++)
@@ -195,38 +209,37 @@ public class TicTac {
                 for (int k = 0; k < map.length; k++)
                 {
                     if (
-                            isCellExists(i + 3, k + 3) && (map [i][k] == symbol && map [i+1][k+1] == symbol && map [i+2][k+2] == symbol && map[i+3][k+3] == symbol) ||
-                                    isCellExists(i, k + 3) && (map [i][k] == symbol && map [i][k+1] == symbol && map [i][k+2] == symbol && map[i][k+3] == symbol) ||
-                                    isCellExists(i + 3, k) && (map [i][k] == symbol && map [i+1][k] == symbol && map [i+2][k] == symbol && map[i+3][k] == symbol) ||
-                                    isCellExists(i + 3, k - 3) && (map [i][k] == symbol && map [i+1][k-1] == symbol && map [i+2][k-2] == symbol && map[i+3][k-3] == symbol)
+                    isCellExists(i + 3, k + 3) && (map [i][k] == symbol && map [i+1][k+1] == symbol && map [i+2][k+2] == symbol && map[i+3][k+3] == symbol) ||
+                    isCellExists(i, k + 3) && (map [i][k] == symbol && map [i][k+1] == symbol && map [i][k+2] == symbol && map[i][k+3] == symbol) ||
+                    isCellExists(i + 3, k) && (map [i][k] == symbol && map [i+1][k] == symbol && map [i+2][k] == symbol && map[i+3][k] == symbol) ||
+                    isCellExists(i + 3, k - 3) && (map [i][k] == symbol && map [i+1][k-1] == symbol && map [i+2][k-2] == symbol && map[i+3][k-3] == symbol)
                     )
                     {
                         result = true;
                         System.out.println("Выиграли: " + symbol);
                     }
-                    if (result)
-                    {
-                        break;
-                    }
+                    if (result) break;
                 }
-                if (result)
-                {
-                    break;
-                }
+                if (result) break;
             }
             return result;
         }
 
-
-        private static void printMap() {
+        //вывод карты в консоль
+        private static void printMap()
+        {
+            //печать шапки массива для пользователя
             System.out.print("0" + "|");
             for (int j = 0; j < map.length;j++)
             {
                 System.out.print(j + 1 + "|");
             }
             System.out.println();
+
+            //печать самого массива
             for (int i = 0; i < map.length; i++)
             {
+                //печать левого поля для пользователя в первом цикле for
                 System.out.print(i + 1 + "|");
                 for (int k = 0; k < map.length; k++)
                 {
@@ -236,12 +249,14 @@ public class TicTac {
             }
         }
 
-
-        private static void playerTurn() {
+        // ход человека
+        private static void playerTurn()
+        {
             int x = - 1, y = -1;
             System.out.println("Введите через пробел координаты X и Y");
             do {
-                if (scanner.hasNextInt()) {
+                if (scanner.hasNextInt())
+                {
                     x = userInput(0, map.length) - 1;
                     y = userInput(0, map.length) - 1;
                 }
@@ -249,22 +264,22 @@ public class TicTac {
                     System.out.println("Повторите ввод");
                     scanner.nextLine();
                 }
-
-            } while (isCellValid(x, y));
-
+            } while (!isCellValid(x, y));
             map[y][x] = playerSymbol;
-
         }
 
-    private static boolean isCellExists(int i, int k) {
-        boolean result = true;
+    //проверка на выход за предел массива
+    private static boolean isCellExists(int i, int k)
+    {
+        boolean res = true;
         if (i < 0 || k < 0 || i >= map.length || k >= map.length)
         {
-            result = false;
+            res = false;
         }
-        return result;
+        return res;
     }
 
+    //проверка доступности клетки для хода
         private static boolean isCellValid(int x, int y)
         {
             boolean res = false;
@@ -285,18 +300,21 @@ public class TicTac {
                 System.out.println("Вы вышли за пределы поля");
             }
 
-            return !res;
+            return res;
         }
 
-        private static void initMap() {
+        //подготовка карты для игры и ее заполнение пустыми символами
+        private static void initMap()
+        {
             for (int i = 0; i < (map.length * map.length); i++)
             {
-                int x = i / map.length;
-                int y = i % map.length;
+                int x = i / map.length;//[0.0.0.0.0]; [1.1.1.1.1]; - только квадратные массивы
+                int y = i % map.length;//[0.1.2.3.4]; [0.1.2.3.4]; - только квадратные массивы
                 map[x][y] = emptySymbol;
             }
         }
 
+        //подсчет очков для пустой клетки для iqAiTurn
     private static int checkCellsAround(int i, int k)
     {
         int scoreCell = 0;
@@ -553,6 +571,6 @@ public class TicTac {
 
         return scoreCell;
     }
-    }
+}
 
 
