@@ -172,15 +172,14 @@ public class TicTac {
 
     private static boolean isMapFull() {
             boolean res = false;
-            for (int i = 0; i < map.length; i++)
+            for (int i = 0; i < (map.length * map.length); i++)
             {
-                for (int k = 0; k < map.length; k++)
-                {
-                    if (map[i][k] == emptySymbol) {
+                int x = i / map.length;
+                int y = i % map.length;
+                    if (map[x][y] == emptySymbol) {
                         res = true;
                         break;
                     }
-                }
                 if (res)
                 {
                     break;
@@ -243,8 +242,8 @@ public class TicTac {
             System.out.println("Введите через пробел координаты X и Y");
             do {
                 if (scanner.hasNextInt()) {
-                    x = getNumberFromConsole() - 1;
-                    y = getNumberFromConsole() - 1;
+                    x = userInput(0, map.length) - 1;
+                    y = userInput(0, map.length) - 1;
                 }
                 else {
                     System.out.println("Повторите ввод");
@@ -290,12 +289,11 @@ public class TicTac {
         }
 
         private static void initMap() {
-            for (int i = 0; i < map.length; i++)
+            for (int i = 0; i < (map.length * map.length); i++)
             {
-                for (int k = 0; k < map.length; k++)
-                {
-                    map[i][k] = emptySymbol;
-                }
+                int x = i / map.length;
+                int y = i % map.length;
+                map[x][y] = emptySymbol;
             }
         }
 
