@@ -309,10 +309,9 @@ public class TicTac {
                             result = true;
                             System.out.println("Выиграли: " + symbol);
                         }
-
                          */
                     return result;
-                    }
+        }
 
 
         //вывод карты в консоль
