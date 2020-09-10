@@ -11,19 +11,53 @@ import java.util.Scanner;
 */
 
 public class TicTac {
-        final static int SIZE = 5;
-        final static char [][] map = new char[SIZE][SIZE];
+        static int SIZE;
+        static char [][] map;
         final static char emptySymbol = '*';
-        final static char playerSymbol = 'Х';
-        final static char computerSymbol = 'O';
+        static char playerSymbol;
+        static char computerSymbol;
         final static Scanner scanner = new Scanner(System.in);
-
+        static int winnerLine;
 
         public static void main(String[] args) {
-           do {
+           System.out.println("Добро пожаловать в игру X и O.");
+            do {
+               SIZE = selectMapSIZE();
+               map = new char[SIZE][SIZE];
+               winnerLine = selectNumberOfWinnerLine();
+               selectYourChar();
                startGame();
            } while (isTryAgain());
         }
+
+    private static int selectMapSIZE() {
+            System.out.println("Установите размер игрового поля: ");
+            return userInput(3,30);
+    }
+
+    private static int selectNumberOfWinnerLine() {
+        System.out.println("Установите количество выигрышных символов: ");
+        return userInput(3,5);
+    }
+
+    private static void selectYourChar() {
+                System.out.println("Выберите символ для игры: x или o");
+                switch (scanner.next()) {
+                    case "o":
+                    case "O":
+                        playerSymbol = 'o';
+                        computerSymbol = 'x';
+                        break;
+                    case "x":
+                    case "X":
+                        playerSymbol = 'x';
+                        computerSymbol = 'o';
+                        break;
+                    default:
+                        System.out.println("Некорректный ввод");
+                        selectYourChar();
+                }
+    }
 
     private static void startGame()
     {
@@ -204,26 +238,74 @@ public class TicTac {
     //проверка победы
     private static boolean isCheckWin(char symbol) {
             boolean result = false;
+
+
             for (int i = 0; i < map.length; i++)
             {
-                for (int k = 0; k < map.length; k++)
+                int diagonal1 = 0, diagonal2 = 0, horizontal = 0, vertical = 0;
+                for (int k = 0, z = i; k < map.length; k++, z++)
                 {
-                    if (
-                    isCellExists(i + 3, k + 3) && (map [i][k] == symbol && map [i+1][k+1] == symbol && map [i+2][k+2] == symbol && map[i+3][k+3] == symbol) ||
-                    isCellExists(i, k + 3) && (map [i][k] == symbol && map [i][k+1] == symbol && map [i][k+2] == symbol && map[i][k+3] == symbol) ||
-                    isCellExists(i + 3, k) && (map [i][k] == symbol && map [i+1][k] == symbol && map [i+2][k] == symbol && map[i+3][k] == symbol) ||
-                    isCellExists(i + 3, k - 3) && (map [i][k] == symbol && map [i+1][k-1] == symbol && map [i+2][k-2] == symbol && map[i+3][k-3] == symbol)
-                    )
+                    if (isCellExists(k,z) && map[k][z] == symbol) {
+                        diagonal1 += 1;
+                    } else {
+                        diagonal1 = 0;
+                    }
+
+                    if (isCellExists(k, map.length - 1 -z) && map[k][map.length - 1 - z] == symbol) {
+                        diagonal2 += 1;
+                    } else {
+                        diagonal2 = 0;
+                    }
+
+                    if (diagonal1 == winnerLine || diagonal2 == winnerLine)
                     {
                         result = true;
-                        System.out.println("Выиграли: " + symbol);
+                        System.out.println("Выиграли: " + symbol + " по диагонали!");
+                        break;
                     }
-                    if (result) break;
+
+                    for (int j = 0; j < map.length; j++) {
+                        if (map[i][j] == symbol) {
+                            horizontal += 1;
+                        } else {
+                            horizontal = 0;
+                        }
+
+                        if (horizontal == winnerLine) {
+                            result = true;
+                            System.out.println("Выиграли: " + symbol + " по горизонтали!");
+                            break;
+                        }
+
+                        if (map[j][i] == symbol) {
+                            vertical += 1;
+                        } else {
+                            vertical = 0;
+                        }
+                        if (vertical == winnerLine) {
+                            result = true;
+                            System.out.println("Выиграли: " + symbol + " по вертикали!");
+                            break;
+                        }
+                    }
                 }
-                if (result) break;
             }
-            return result;
-        }
+                        /*
+                        if (
+
+                                isCellExists(i + 3, k + 3) && (map[i][k] == symbol && map[i + 1][k + 1] == symbol && map[i + 2][k + 2] == symbol && map[i + 3][k + 3] == symbol) ||
+                                        isCellExists(i, k + 3) && (map[i][k] == symbol && map[i][k + 1] == symbol && map[i][k + 2] == symbol && map[i][k + 3] == symbol) ||
+                                        isCellExists(i + 3, k) && (map[i][k] == symbol && map[i + 1][k] == symbol && map[i + 2][k] == symbol && map[i + 3][k] == symbol) ||
+                                        isCellExists(i + 3, k - 3) && (map[i][k] == symbol && map[i + 1][k - 1] == symbol && map[i + 2][k - 2] == symbol && map[i + 3][k - 3] == symbol)
+                        ) {
+                            result = true;
+                            System.out.println("Выиграли: " + symbol);
+                        }
+
+                         */
+                    return result;
+                    }
+
 
         //вывод карты в консоль
         private static void printMap()
