@@ -239,19 +239,20 @@ public class TicTac {
     private static boolean isCheckWin(char symbol) {
             boolean result = false;
 
-
             for (int i = 0; i < map.length; i++)
             {
                 int diagonal1 = 0, diagonal2 = 0, horizontal = 0, vertical = 0;
                 for (int k = 0, z = i; k < map.length; k++, z++)
                 {
-                    if (isCellExists(k,z) && map[k][z] == symbol) {
+                    if (isCellExists(k,z) && map[k][z] == symbol)
+                    {
                         diagonal1 += 1;
                     } else {
                         diagonal1 = 0;
                     }
 
-                    if (isCellExists(k, map.length - 1 -z) && map[k][map.length - 1 - z] == symbol) {
+                    if (isCellExists(k, map.length - 1 - z) && map[k][map.length - 1 - z] == symbol)
+                    {
                         diagonal2 += 1;
                     } else {
                         diagonal2 = 0;
@@ -264,29 +265,36 @@ public class TicTac {
                         break;
                     }
 
-                    for (int j = 0; j < map.length; j++) {
-                        if (map[i][j] == symbol) {
+                    for (int j = 0; j < map.length; j++)
+                    {
+                        if (map[i][j] == symbol)
+                        {
                             horizontal += 1;
                         } else {
                             horizontal = 0;
                         }
 
-                        if (horizontal == winnerLine) {
+                        if (horizontal == winnerLine)
+                        {
                             result = true;
                             System.out.println("Выиграли: " + symbol + " по горизонтали!");
                             break;
                         }
 
-                        if (map[j][i] == symbol) {
+                        if (map[j][i] == symbol)
+                        {
                             vertical += 1;
                         } else {
                             vertical = 0;
                         }
-                        if (vertical == winnerLine) {
+
+                        if (vertical == winnerLine)
+                        {
                             result = true;
                             System.out.println("Выиграли: " + symbol + " по вертикали!");
                             break;
                         }
+
                     }
                 }
             }
