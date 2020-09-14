@@ -56,7 +56,7 @@ public class Lesson_6_EDI {
 
         for (Animal animal : animalEatArr()) {
             if (animal.hungry) {
-                System.out.println("Кормим котов оставшихся голодными: ");
+                System.out.println("Кормим животных оставшихся голодными: ");
                 animal.eatFromDish(dish);
             }
 
