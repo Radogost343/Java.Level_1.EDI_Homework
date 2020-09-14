@@ -4,7 +4,6 @@ public class Dish {
     private int maxFood;
     private int foodInDish;
 
-
     protected Dish(int foodInDish, int maxFood) {
         this.foodInDish = foodInDish;
         this.maxFood = maxFood;

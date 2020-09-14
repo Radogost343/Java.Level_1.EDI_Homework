@@ -3,10 +3,10 @@ package ru.Cats;
 import ru.Animal;
 
 public class Cat extends Animal {
-    int maxRun = 200;
-    int maxSwim = 5;
-    double maxJump = 2.0;
-    int maxEat = 10;
+    private int maxRun = 200;
+    private int maxSwim = 5;
+    private double maxJump = 2.0;
+    private int maxEat = 10;
 
     @Override
     public double getMaxJump() {
