@@ -32,6 +32,7 @@ public class Dish {
         } else {
             foodInDish = getFood() + put;
         }
+        System.out.println("Пополнение миски едой " + put);
     }
 
     protected void dishInfo() {

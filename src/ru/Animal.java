@@ -70,13 +70,9 @@ public abstract class Animal {
         if (catEat >= 0){
             this.hungry = false;
             dish.setFood(catEat);
-            System.out.println(this.name + " Покушал " + this.eat + " еды." + " Еды в миске: " + dish.getFood()
-                    + " голодный: " + this.hungry);
+            System.out.println(this.name + " Покушал " + this.eat + " еды." + " Еды в миске: " + dish.getFood());
         } else {
-            System.out.println(this.name + " пытается покушать " + this.eat + " еды. Недостаточно еды в миске: " + dish.getFood()
-                    + " остался голодный: " + this.hungry );
-            dish.putToDish(this.eat*2);
-            System.out.println("Пополнение миски едой: " + (this.eat*2) + " Еды в миске: " + dish.getFood());
+            System.out.println(this.name + " пытается покушать " + this.eat + " еды. Недостаточно еды в миске: " + dish.getFood());
         }
     }
 
