@@ -12,7 +12,6 @@ public abstract class Animal {
     private int maxRun;
     private int maxSwim;
     private double maxJump;
-    private int maxEat;
 
     protected Animal (String name, int run, int swim, double jump)
     {
@@ -56,20 +55,11 @@ public abstract class Animal {
         return res;
     }
 
-    protected boolean canEat(int eat) {
-        boolean res = true;
-        if (eat > getMaxEat()) {
-            res = false;
-        }
-        System.out.println(this.name + " canEat " + eat + " " + res + "; ");
-        return res;
-    }
-
     protected void eatFromDish (Dish dish) {
-        int catEat = dish.getFood() - this.eat;
-        if (catEat >= 0){
+        int eat = dish.getFood() - this.eat;
+        if (eat >= 0){
             this.hungry = false;
-            dish.setFood(catEat);
+            dish.setFood(eat);
             System.out.println(this.name + " Покушал " + this.eat + " еды." + " Еды в миске: " + dish.getFood());
         } else {
             System.out.println(this.name + " пытается покушать " + this.eat + " еды. Недостаточно еды в миске: " + dish.getFood());
@@ -105,12 +95,8 @@ public abstract class Animal {
         this.maxJump = maxJump;
     }
 
-    public int getMaxEat() {
-        return maxEat;
-    }
-
     public void setMaxEat(int maxEat) {
-        this.maxEat = maxEat;
+        this.eat = maxEat;
     }
 }
 

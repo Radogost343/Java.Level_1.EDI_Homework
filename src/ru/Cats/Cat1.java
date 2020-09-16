@@ -2,21 +2,17 @@ package ru.Cats;
 
 import ru.Animal;
 
-public class Cat1 extends Cat {
+public class Cat1 extends Animal {
     final private int maxRun = 400;
     final private int maxSwim = 0;
     final private double maxJump = 4.0;
-    final private int maxEat = 20;
+
 
     @Override
     public double getMaxJump() {
         return maxJump;
     }
 
-    @Override
-    public int getMaxEat() {
-        return maxEat;
-    }
 
     @Override
     public int getMaxRun() {
@@ -30,7 +26,9 @@ public class Cat1 extends Cat {
 
     @Override
     protected boolean canSwim(int swim) {
-        return super.canSwim(swim);
+        boolean res = false;
+        System.out.print(this.name + " canSwim " + swim + " " + res + "; коты не плавают; ");
+        return res;
     }
 
     public Cat1 (String name, int eat, boolean hungry) {

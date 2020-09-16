@@ -6,16 +6,10 @@ public class Cat extends Animal {
     final private int maxRun = 200;
     final private int maxSwim = 5;
     final private double maxJump = 2.0;
-    final private int maxEat = 10;
 
     @Override
     public double getMaxJump() {
         return maxJump;
-    }
-
-    @Override
-    public int getMaxEat() {
-        return maxEat;
     }
 
     @Override
