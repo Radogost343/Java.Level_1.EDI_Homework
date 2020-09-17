@@ -34,13 +34,13 @@ public class Lesson_6_EDI {
     public static void animalArrInfo(Animal [] animalArr) {
         for (Animal animal : animalArr) {
             animal.animalInfo();
-            animal.canRun(animal.run);
+            animal.canRun(animal.run, animal.getMaxRun());
             System.out.print("maxRun = " + animal.getMaxRun() + ";");
             System.out.println();
-            animal.canSwim(animal.swim);
+            animal.canSwim(animal.swim, animal.getMaxSwim());
             System.out.print("maxSwim = " + animal.getMaxSwim() + ";");
             System.out.println();
-            animal.canJump(animal.jump);
+            animal.canJump(animal.jump, animal.getMaxJump());
             System.out.print("maxJump = " + animal.getMaxJump() + ";");
             System.out.println();
             System.out.println();

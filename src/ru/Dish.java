@@ -4,6 +4,8 @@ public class Dish {
     private int maxFood;
     private int foodInDish;
 
+
+
     protected Dish(int foodInDish, int maxFood) {
         this.foodInDish = foodInDish;
         this.maxFood = maxFood;
@@ -17,12 +19,16 @@ public class Dish {
         return maxFood;
     }
 
-    public void setFood(int animalEat) {
-        foodInDish = animalEat;
+    protected void decreaseFoodinDish (int AnimalEat) {
+        foodInDish -= AnimalEat;
     }
 
     public void setMaxFood(int maxFood) {
         this.maxFood = maxFood;
+    }
+
+    public void setFoodInDish(int foodInDish) {
+        this.foodInDish = foodInDish;
     }
 
     // пополнение миски едой

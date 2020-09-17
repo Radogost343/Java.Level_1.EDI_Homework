@@ -3,8 +3,8 @@ package ru.Cats;
 import ru.Animal;
 
 public class Cat extends Animal {
-    final private int maxRun = 200;
-    final private int maxSwim = 5;
+    final private double maxRun = 200;
+    final private double maxSwim = 5;
     final private double maxJump = 2.0;
 
     @Override
@@ -13,27 +13,25 @@ public class Cat extends Animal {
     }
 
     @Override
-    public int getMaxRun() {
+    public double getMaxRun() {
         return maxRun;
     }
 
     @Override
-    public int getMaxSwim() {
+    public double getMaxSwim() {
         return maxSwim;
     }
 
     @Override
-    protected boolean canSwim(int swim) {
-        boolean res = false;
-        System.out.print(this.name + " canSwim " + swim + " " + res + "; коты не плавают; ");
-        return res;
+    protected void canSwim(double swim, double maxSwim) {
+        System.out.print("Коты не плавают; ");
     }
 
     public Cat (String name, int eat, boolean hungry) {
         super(name, eat, hungry);
     }
 
-    public Cat (String name, int run, int swim, double jump)
+    public Cat (String name, double run, double swim, double jump)
     {
         super(name, run, swim, jump);
     }

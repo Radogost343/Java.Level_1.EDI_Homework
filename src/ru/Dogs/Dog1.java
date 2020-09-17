@@ -3,8 +3,8 @@ package ru.Dogs;
 import ru.Animal;
 
 public class Dog1 extends Animal {
-    final private int maxRun = 1000;
-    final private int maxSwim = 20;
+    final private double maxRun = 1000;
+    final private double maxSwim = 20;
     final private double maxJump = 1.0;
 
     @Override
@@ -13,12 +13,12 @@ public class Dog1 extends Animal {
     }
 
     @Override
-    public int getMaxRun() {
+    public double getMaxRun() {
         return maxRun;
     }
 
     @Override
-    public int getMaxSwim() {
+    public double getMaxSwim() {
         return maxSwim;
     }
 
@@ -26,7 +26,7 @@ public class Dog1 extends Animal {
         super(name, eat, hungry);
     }
 
-    public Dog1 (String name, int run, int swim, double jump)
+    public Dog1 (String name, double run, double swim, double jump)
     {
         super(name, run, swim, jump);
     }

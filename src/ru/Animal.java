@@ -3,17 +3,17 @@ package ru;
 public abstract class Animal {
 
     protected String name;
-    protected int run;
-    protected int swim;
+    protected double run;
+    protected double swim;
     protected double jump;
     protected int eat;
     protected boolean hungry = true;
 
-    private int maxRun;
-    private int maxSwim;
+    private double maxRun;
+    private double maxSwim;
     private double maxJump;
 
-    protected Animal (String name, int run, int swim, double jump)
+    protected Animal (String name, double run, double swim, double jump)
     {
         this.name = name;
         this.run = run;
@@ -28,38 +28,28 @@ public abstract class Animal {
         this.hungry = hungry;
     }
 
-    protected boolean canRun(int run) {
-        boolean res = true;
-        if (run > getMaxRun()) {
-            res = false;
-        }
-        System.out.println(this.name + " canRun " + run + " " + res + "; ");
-        return res;
+    public boolean isAvailableAction (double action, double maxAction) {
+    return action <= maxAction;
     }
 
-    protected boolean canSwim(int swim) {
-        boolean res = true;
-        if (swim > getMaxSwim()) {
-            res = false;
-        }
-        System.out.println(this.name + " canSwim " + swim + " " + res + "; ");
-        return res;
+    protected void canRun(double run, double maxRun) {
+        System.out.println(this.name + " canRun " + this.run + " " + isAvailableAction(this.run,getMaxRun()) + "; ");
     }
 
-    protected boolean canJump(double jump) {
-        boolean res = true;
-        if (jump > getMaxJump()) {
-            res = false;
-        }
-        System.out.println(this.name + " canJump " + jump + " " + res + "; ");
-        return res;
+    protected void canSwim(double swim, double maxSwim) {
+        System.out.println(this.name + " canSwim " + swim + " " + isAvailableAction(this.swim,getMaxSwim()) + "; ");
+
+    }
+
+    protected void canJump(double jump, double maxJump) {
+        System.out.println(this.name + " canJump " + jump + " " + isAvailableAction(this.jump, getMaxJump()) + "; ");
     }
 
     protected void eatFromDish (Dish dish) {
         int eat = dish.getFood() - this.eat;
         if (eat >= 0){
             this.hungry = false;
-            dish.setFood(eat);
+            dish.decreaseFoodinDish(this.eat);
             System.out.println(this.name + " Покушал " + this.eat + " еды." + " Еды в миске: " + dish.getFood());
         } else {
             System.out.println(this.name + " пытается покушать " + this.eat + " еды. Недостаточно еды в миске: " + dish.getFood());
@@ -70,7 +60,7 @@ public abstract class Animal {
         System.out.println("Name: " + this.name + "; Run " + this.run + "; Swim "+ this.swim + "; Jump " + this.jump);
     }
 
-    public int getMaxRun() {
+    public double getMaxRun() {
         return maxRun;
     }
 
@@ -79,7 +69,7 @@ public abstract class Animal {
     }
 
 
-    public int getMaxSwim() {
+    public double getMaxSwim() {
         return maxSwim;
     }
 
