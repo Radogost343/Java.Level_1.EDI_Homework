@@ -72,6 +72,7 @@ private String action;
             equation = "";
         });
 
+
         JButton btnEqual = new JButton("=");
         btnEqual.setFont(label.getFont().deriveFont(25f));
         btnEqual.addActionListener(e -> {
